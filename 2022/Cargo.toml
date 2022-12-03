@@ -2,5 +2,6 @@
 members = [
     "aufg1",
     "aufg2",
+    "aufg3",
     "mainlib"
 ]
