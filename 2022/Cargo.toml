@@ -3,5 +3,7 @@ members = [
     "aufg1",
     "aufg2",
     "aufg3",
+    "aufg4",
+    "aufg5",
     "mainlib"
 ]
