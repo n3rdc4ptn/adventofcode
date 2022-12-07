@@ -8,9 +8,13 @@ fn main() {
 
     //println!("{:?}", lines);
 
-    let sol1 = solve1(lines);
+    let sol1 = solve1(lines.clone());
 
-    println!("{sol1}");
+    println!("Sol1: {sol1}");
+
+    let sol2 = solve2(lines);
+
+    println!("Sol2: {sol2}");
 }
 
 fn extract_header(lines: Vec<String>) -> (Vec<String>, Vec<String>) {
@@ -119,9 +123,41 @@ fn solve1(lines: Vec<String>) -> String {
 
     let result: Vec<&String> = stacks.iter().filter_map(|x| x.0.last()).collect();
 
-    stacks.iter().for_each(|x| {
-        println!("{:?}", x);
+    format!("{:?}", result)
+}
+
+fn solve2(lines: Vec<String>) -> String {
+    let (header, moves) = extract_header(lines);
+
+    let mut stacks = parse_header(header);
+
+    let moves = parse_moves(moves);
+
+    let mut t = 0;
+    moves.iter().for_each(|m| {
+        let from_stack = &mut stacks[m.from - 1].0;
+        let mut element = from_stack[(from_stack.len() - m.how_many)..].to_vec();
+
+        from_stack.drain((from_stack.len() - m.how_many)..);
+
+        if t == 0 {
+            println!("{:?} {:?}", from_stack, element);
+            println!("{} -> {}", m.how_many, element.len());
+
+            println!("{:?} {:?}", stacks[m.to - 1].0, element);
+        }
+
+        stacks[m.to - 1].0.append(&mut element);
+
+        if t == 0 {
+            println!("{:?}", stacks[m.to - 1].0);
+            t += 1;
+        }
     });
+
+    println!("{:#?}", stacks);
+
+    let result: Vec<&String> = stacks.iter().filter_map(|x| x.0.last()).collect();
 
     format!("{:?}", result)
 }
