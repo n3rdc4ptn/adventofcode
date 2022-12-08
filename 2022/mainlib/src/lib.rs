@@ -5,3 +5,7 @@ pub fn read_file(file_path: &str) -> Vec<String> {
 
     contents.split("\n").map(|x| x.to_owned()).collect()
 }
+
+pub fn write_file(content: Vec<String>, file_path: &str) {
+    let _ = fs::write(file_path, content.join("\n"));
+}

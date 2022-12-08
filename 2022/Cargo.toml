@@ -6,5 +6,7 @@ members = [
     "aufg4",
     "aufg5",
     "aufg6",
+    "aufg7",
+    "aufg8",
     "mainlib"
 ]
