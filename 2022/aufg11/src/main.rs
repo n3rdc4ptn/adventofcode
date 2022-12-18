@@ -79,6 +79,7 @@ struct Monkey {
     operation: Box<dyn Fn(usize) -> usize>,
     // A function which returns the number of the monkey to which it throws it
     test: Box<dyn Fn(usize) -> usize>,
+    divisible_by: usize,
 }
 
 impl Debug for Monkey {
@@ -170,6 +171,7 @@ impl Monkey {
             inspections: 0,
             operation,
             test,
+            divisible_by,
         })
     }
 }
@@ -216,18 +218,15 @@ impl MonkeyGroup {
                 }
 
                 for (target_monkey, worry_level) in movings {
-                    dbg!(target_monkey, worry_level);
                     self.monkeys[target_monkey].items.push(worry_level);
-                    // if let Some(target_monkey) = &mut self.monkeys.get_mut(target_monkey) {
-                    //     target_monkey.items.push(worry_level);
-                    //     dbg!(target_monkey);
-                    // }
                 }
             }
         }
     }
 
     fn round2(&mut self) {
+        let magic_trick_number: usize = self.monkeys.iter().map(|x| x.divisible_by).product();
+
         for idx in 0..self.monkeys.len() {
             if let Some(monkey) = self.monkeys.get_mut(idx) {
                 let items = monkey.items.clone();
@@ -241,18 +240,15 @@ impl MonkeyGroup {
 
                     let new_worry_level = (monkey.operation)(worry_level);
 
+                    let new_worry_level = new_worry_level % magic_trick_number;
+
                     let target_monkey = (monkey.test)(new_worry_level);
 
                     movings.push((target_monkey, new_worry_level));
                 }
 
                 for (target_monkey, worry_level) in movings {
-                    dbg!(target_monkey, worry_level);
                     self.monkeys[target_monkey].items.push(worry_level);
-                    // if let Some(target_monkey) = &mut self.monkeys.get_mut(target_monkey) {
-                    //     target_monkey.items.push(worry_level);
-                    //     dbg!(target_monkey);
-                    // }
                 }
             }
         }
