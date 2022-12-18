@@ -16,6 +16,13 @@ name = "aufg1"
 version = "0.1.0"
 
 [[package]]
+name = "aufg10"
+version = "0.1.0"
+dependencies = [
+ "mainlib",
+]
+
+[[package]]
 name = "aufg12"
 version = "0.1.0"
 dependencies = [
