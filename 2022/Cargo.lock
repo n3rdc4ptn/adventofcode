@@ -23,6 +23,13 @@ dependencies = [
 ]
 
 [[package]]
+name = "aufg11"
+version = "0.1.0"
+dependencies = [
+ "mainlib",
+]
+
+[[package]]
 name = "aufg12"
 version = "0.1.0"
 dependencies = [
