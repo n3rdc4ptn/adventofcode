@@ -1,0 +1,18 @@
+[workspace]
+members = [
+    "aufg1",
+    # "aufg2",
+    # "aufg3",
+    # "aufg4",
+    # "aufg5",
+    # "aufg6",
+    # "aufg7",
+    # "aufg8",
+    # "aufg9",
+    # "aufg10",
+    # "aufg11",
+    # "aufg12",
+    "mainlib"
+]
+
+resolver = "2"
